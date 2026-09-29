@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran Interaktif: Big Data untuk Desa Modern</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font: Plus Jakarta Sans (Sangat Jelas & Legible) -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        desa: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        emas: {
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #16a34a;
+            border-radius: 4px;
+        }
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            body {
+                background: white;
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-desa-100 selection:text-desa-800">
+
+    <!-- HEADER BAR -->
+    <header class="bg-gradient-to-r from-desa-900 via-desa-800 to-desa-700 text-white shadow-lg sticky top-0 z-50 no-print">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-emas-500 text-desa-900 p-2.5 rounded-xl shadow-md font-bold text-xl">
+                    <i class="fa-solid font-bold fa-tree-city"></i>
+                </div>
+                <div>
+                    <span class="bg-emas-500/20 text-emas-400 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-emas-500/30">Modul Perkuliahan RPL Desa</span>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-tight">Big Data di Desa: Konsep & Pemanfaatan</h1>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <button onclick="window.print()" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-xl text-sm font-medium transition flex items-center gap-2 border border-white/20">
+                    <i class="fa-solid fa-print text-emas-400"></i> Cetak / Simpan PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-10 flex-grow w-full">
+        
+        <!-- SAMBUTAN / HERO -->
+        <section class="bg-gradient-to-br from-desa-800 to-desa-900 rounded-3xl p-6 md:p-10 text-white shadow-xl relative overflow-hidden">
+            <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-desa-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10 max-w-3xl space-y-4">
+                <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-lg text-sm text-emas-400 font-medium border border-white/10">
+                    <i class="fa-solid fa-handshake"></i> Selamat Datang Bapak / Ibu Mahasiswa RPL Desa
+                </div>
+                <h2 class="text-2xl md:text-4xl font-extrabold leading-tight">
+                    Mengubah Data Desa Menjadi <span class="text-emas-400">Keputusan Tepat Sasaran</span>
+                </h2>
+                <p class="text-base md:text-lg text-emerald-100/90 leading-relaxed">
+                    Sebagai perangkat dan tokoh desa, Bapak/Ibu setiap hari berhubungan dengan data: kartu keluarga, penerima bantuan, transaksi BUMDes, hingga peta sawah. Modul interaktif ini dirancang khusus untuk mempermudah pemahaman konsep **Big Data** secara praktis tanpa rumus rumit.
+                </p>
+                <div class="pt-2 flex flex-wrap gap-4 text-sm font-medium">
+                    <div class="bg-white/10 px-4 py-2 rounded-xl flex items-center gap-2">
+                        <i class="fa-solid fa-clock text-emas-400"></i> Durasi Belajar: ~20 Menit
+                    </div>
+                    <div class="bg-white/10 px-4 py-2 rounded-xl flex items-center gap-2">
+                        <i class="fa-solid fa-list-check text-emas-400"></i> Dilengkapi Lembar Kerja Tugas
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NAVIGATION TABS -->
+        <nav class="flex border-b border-slate-200 overflow-x-auto gap-2 no-print pb-1" id="nav-tabs">
+            <button onclick="switchTab('konsep')" id="tab-konsep" class="tab-btn px-5 py-3 rounded-t-2xl font-bold text-base md:text-lg flex items-center gap-2 whitespace-nowrap transition bg-desa-700 text-white shadow-sm">
+                <i class="fa-solid fa-lightbulb"></i> 1. Apa itu Big Data Desa?
+            </button>
+            <button onclick="switchTab('lima-v')" id="tab-lima-v" class="tab-btn px-5 py-3 rounded-t-2xl font-bold text-base md:text-lg flex items-center gap-2 whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+                <i class="fa-solid fa-cubes"></i> 2. Mengenal 5V Data
+            </button>
+            <button onclick="switchTab('kasus')" id="tab-kasus" class="tab-btn px-5 py-3 rounded-t-2xl font-bold text-base md:text-lg flex items-center gap-2 whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+                <i class="fa-solid fa-magnifying-glass-chart"></i> 3. Contoh Pemanfaatan
+            </button>
+            <button onclick="switchTab('tugas')" id="tab-tugas" class="tab-btn px-5 py-3 rounded-t-2xl font-bold text-base md:text-lg flex items-center gap-2 whitespace-nowrap transition bg-slate-100 text-slate-600 hover:bg-slate-200">
+                <i class="fa-solid fa-pen-to-square"></i> 4. Panduan Tugas Kelas
+            </button>
+        </nav>
+
+        <!-- TAB CONTENT 1: KONSEP DASAR -->
+        <div id="content-konsep" class="tab-content space-y-6">
+            <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+                <div class="border-l-4 border-desa-600 pl-4">
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-800">Sederhananya, Apa Itu Big Data Desa?</h3>
+                    <p class="text-slate-600 text-base md:text-lg mt-1">Sering mendengar istilah Big Data tapi terasa asing? Mari kita analogikan dengan hal sederhana di kantor desa.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-amber-50 p-6 rounded-2xl border border-amber-200 space-y-3">
+                        <div class="w-12 h-12 bg-amber-500 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-amber-900">Dahulu (Cara Konvensional)</h4>
+                        <p class="text-slate-700 leading-relaxed text-base">
+                            Data desa dicatat manual dalam buku buku besar yang tebal. Saat Kepala Desa bertanya <i>"Berapa jumlah lansia kurang mampu di RW 02?"</i>, perangkat desa harus membuka halaman demi halaman buku catatan. Membutuhkan waktu lama dan rawan terselip.
+                        </p>
+                    </div>
+
+                    <div class="bg-emerald-50 p-6 rounded-2xl border border-emerald-200 space-y-3">
+                        <div class="w-12 h-12 bg-desa-600 text-white rounded-xl flex items-center justify-center font-bold text-xl shadow">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-desa-900">Sekarang (Era Big Data Desa)</h4>
+                        <p class="text-slate-700 leading-relaxed text-base">
+                            Semua data (KTP, foto kondisi rumah warga, data bantuan sosial, panen petani) terhubung secara digital. Dengan sekali klik di komputer/HP, Kepala Desa langsung mendapatkan grafik presisi dan jawaban akurat dalam hitungan detik.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 flex flex-col md:flex-row items-center gap-6">
+                    <div class="text-4xl text-desa-600 md:text-5xl">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-lg text-slate-800">Tujuan Utama Big Data di Desa:</h4>
+                        <p class="text-slate-600 text-base mt-1">
+                            Bukan untuk gaya-gayaan menggunakan komputer canggih, melainkan agar <strong>setiap kebijakan, anggaran, dan bantuan desa terdistribusi secara adil, akurat, dan tepat sasaran</strong> kepada warga yang benar-benar membutuhkan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 2: 5V BIG DATA INTERAKTIF -->
+        <div id="content-lima-v" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+                <div>
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-800">5 Karakteristik Big Data (5V) di Desa</h3>
+                    <p class="text-slate-600 text-base md:text-lg mt-1">Klik tiap tombol 'V' di bawah ini untuk melihat contoh konkretnya di lingkungan desa Bapak/Ibu:</p>
+                </div>
+
+                <!-- Interactive 5V Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-3" id="v-buttons">
+                    <button onclick="showV(1)" id="btn-v1" class="v-btn p-4 rounded-2xl border-2 border-desa-600 bg-desa-50 text-desa-800 font-bold text-center hover:shadow-md transition">
+                        <div class="text-2xl mb-1"><i class="fa-solid fa-boxes-stacked"></i></div>
+                        1. Volume
+                    </button>
+                    <button onclick="showV(2)" id="btn-v2" class="v-btn p-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-bold text-center hover:bg-slate-50 transition">
+                        <div class="text-2xl mb-1"><i class="fa-solid fa-layer-group"></i></div>
+                        2. Variety
+                    </button>
+                    <button onclick="showV(3)" id="btn-v3" class="v-btn p-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-bold text-center hover:bg-slate-50 transition">
+                        <div class="text-2xl mb-1"><i class="fa-solid fa-gauge-high"></i></div>
+                        3. Velocity
+                    </button>
+                    <button onclick="showV(4)" id="btn-v4" class="v-btn p-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-bold text-center hover:bg-slate-50 transition">
+                        <div class="text-2xl mb-1"><i class="fa-solid fa-shield-halved"></i></div>
+                        4. Veracity
+                    </button>
+                    <button onclick="showV(5)" id="btn-v5" class="v-btn p-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-bold text-center hover:bg-slate-50 transition">
+                        <div class="text-2xl mb-1"><i class="fa-solid fa-sack-dollar"></i></div>
+                        5. Value
+                    </button>
+                </div>
+
+                <!-- Dynamic V Content Box -->
+                <div id="v-detail-box" class="bg-gradient-to-r from-desa-50 to-emerald-50 p-6 md:p-8 rounded-2xl border border-desa-200 space-y-4">
+                    <!-- Content populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 3: CONTOH PEMANFAATAN -->
+        <div id="content-kasus" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+                <div>
+                    <h3 class="text-xl md:text-2xl font-bold text-slate-800">Simulasi Studi Kasus: Pilih Masalah Desa Anda</h3>
+                    <p class="text-slate-600 text-base md:text-lg mt-1">Pilih salah satu tantangan desa di bawah ini untuk melihat bagaimana pengolahan data sederhana bisa memberikan solusi nyata:</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-4">
+                    <button onclick="simulasiKasus('bansos')" id="btn-kasus-bansos" class="kasus-btn p-5 rounded-2xl border-2 border-desa-600 bg-desa-50 text-left hover:shadow-md transition">
+                        <div class="w-10 h-10 bg-desa-600 text-white rounded-lg flex items-center justify-center font-bold mb-3">
+                            <i class="fa-solid fa-hand-holding-heart"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Penyaluran Bansos</h4>
+                        <p class="text-sm text-slate-600 mt-1">Solusi agar bantuan tidak tumpang tindih atau keliru.</p>
+                    </button>
+
+                    <button onclick="simulasiKasus('bumdes')" id="btn-kasus-bumdes" class="kasus-btn p-5 rounded-2xl border-2 border-slate-200 bg-white text-left hover:bg-slate-50 transition">
+                        <div class="w-10 h-10 bg-blue-600 text-white rounded-lg flex items-center justify-center font-bold mb-3">
+                            <i class="fa-solid fa-store"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Pengembangan BUMDes</h4>
+                        <p class="text-sm text-slate-600 mt-1">Mengetahui produk usaha desa yang paling diminati warga.</p>
+                    </button>
+
+                    <button onclick="simulasiKasus('tani')" id="btn-kasus-tani" class="kasus-btn p-5 rounded-2xl border-2 border-slate-200 bg-white text-left hover:bg-slate-50 transition">
+                        <div class="w-10 h-10 bg-amber-600 text-white rounded-lg flex items-center justify-center font-bold mb-3">
+                            <i class="fa-solid fa-wheat-awn"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-800 text-lg">Pemetaan Pertanian</h4>
+                        <p class="text-sm text-slate-600 mt-1">Mengatur jadwal pupuk dan perkiraan waktu panen.</p>
+                    </button>
+                </div>
+
+                <!-- Simulation Result Display -->
+                <div id="kasus-result-box" class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB CONTENT 4: PANDUAN TUGAS & KERTAS KERJA -->
+        <div id="content-tugas" class="tab-content space-y-6 hidden">
+            <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+                <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-2xl flex items-start gap-3">
+                    <i class="fa-solid fa-circle-info text-amber-600 text-xl mt-0.5"></i>
+                    <div>
+                        <h4 class="font-bold text-amber-900 text-lg">Petunjuk untuk Mahasiswa RPL Desa:</h4>
+                        <p class="text-amber-800 text-base mt-0.5">
+                            Bapak/Ibu dapat mengisi lembar kerja latihan di bawah ini secara langsung. Setelah selesai, tekan tombol <strong>"Cetak / Simpan Lembar Kerja"</strong> untuk mengunduh jawaban dalam bentuk PDF yang siap dikumpulkan ke Google Classroom.
+                        </p>
+                    </div>
+                </div>
+
+                <form id="tugasForm" class="space-y-6" onsubmit="event.preventDefault(); window.print();">
+                    <div class="grid md:grid-cols-2 gap-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">Nama Mahasiswa:</label>
+                            <input type="text" id="nama" placeholder="Masukkan nama lengkap Anda" class="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-desa-600 outline-none">
+                        </div>
+                        <div>
+                            <label class="block font-bold text-slate-700 mb-1">NIM / Jabatan Desa:</label>
+                            <input type="text" id="nim" placeholder="Contoh: 20261001 / Kaur Kesra Desa Sukamaju" class="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-desa-600 outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Soal 1 -->
+                    <div class="space-y-2">
+                        <label class="block font-bold text-slate-800 text-lg">
+                            1. Pilih Topik/Bidang Data di Desa Anda:
+                        </label>
+                        <select id="soal1" class="w-full p-3.5 rounded-xl border border-slate-300 bg-white font-medium text-slate-700 focus:ring-2 focus:ring-desa-600 outline-none">
+                            <option value="Data Bansos & Penduduk Kurang Mampu">Data Kependudukan & Bantuan Sosial (PKH/BLT/DTKS)</option>
+                            <option value="Data Usaha Desa & BUMDes">Data Usaha Desa / BUMDes / UMKM Desa</option>
+                            <option value="Data Lahan Pertanian & Aset Desa">Data Lahan Pertanian / Aset Desa / Peta Batas Wilayah</option>
+                            <option value="Pelayanan Administrasi Kependudukan">Pelayanan Surat Keterangan & Administrasi Desa</option>
+                        </select>
+                    </div>
+
+                    <!-- Soal 2 -->
+                    <div class="space-y-2">
+                        <label class="block font-bold text-slate-800 text-lg">
+                            2. Identifikasi Karakter Data (3 Ringkasan):
+                        </label>
+                        <div class="grid md:grid-cols-3 gap-3">
+                            <div>
+                                <span class="text-sm font-semibold text-slate-600">Berapa Banyak (Volume)?</span>
+                                <input type="text" id="soal2_vol" placeholder="Misal: ~1.500 KK" class="w-full p-3 rounded-xl border border-slate-300 mt-1">
+                            </div>
+                            <div>
+                                <span class="text-sm font-semibold text-slate-600">Bentuk Data (Variety)?</span>
+                                <input type="text" id="soal2_var" placeholder="Misal: Excel, Foto KTP, Buku Register" class="w-full p-3 rounded-xl border border-slate-300 mt-1">
+                            </div>
+                            <div>
+                                <span class="text-sm font-semibold text-slate-600">Masalah Data (Veracity)?</span>
+                                <input type="text" id="soal2_ver" placeholder="Misal: Data ganda / NIK beda" class="w-full p-3 rounded-xl border border-slate-300 mt-1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Soal 3 -->
+                    <div class="space-y-2">
+                        <label class="block font-bold text-slate-800 text-lg">
+                            3. Solusi Praktis yang Diharapkan:
+                        </label>
+                        <p class="text-slate-600 text-sm">Jelaskan singkat masalah apa yang terselesaikan jika data tersebut dirapikan dan mudah diakses Kepala Desa:</p>
+                        <textarea id="soal3" rows="3" placeholder="Tuliskan jawaban Anda di sini dengan bahasa sendiri..." class="w-full p-3.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-desa-600 outline-none"></textarea>
+                    </div>
+
+                    <!-- Soal 4 -->
+                    <div class="space-y-2">
+                        <label class="block font-bold text-slate-800 text-lg">
+                            4. Cara Menjaga Keamanan Data Warga:
+                        </label>
+                        <textarea id="soal4" rows="2" placeholder="Contoh: Komputer diberi password, NIK tidak dipublikasikan ke medsos..." class="w-full p-3.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-desa-600 outline-none"></textarea>
+                    </div>
+
+                    <div class="pt-4 flex flex-wrap gap-4 no-print">
+                        <button type="button" onclick="simpanJawabanLokal()" class="bg-desa-700 hover:bg-desa-800 text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition flex items-center gap-2">
+                            <i class="fa-solid fa-floppy-disk"></i> Simpan Draf Jawaban
+                        </button>
+                        <button type="submit" class="bg-emas-500 hover:bg-emas-600 text-desa-900 font-bold px-6 py-3.5 rounded-xl shadow-md transition flex items-center gap-2">
+                            <i class="fa-solid fa-file-pdf"></i> Cetak / Simpan Ke PDF
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 mt-12 no-print">
+        <div class="max-w-6xl mx-auto px-4 text-center space-y-2">
+            <p class="font-medium text-slate-300">Program Rekognisi Pembelajaran Lampau (RPL) Desa - Pembelajaran Digital Interaktif</p>
+            <p class="text-sm text-slate-500">Dirancang khusus ramah pengguna (Age-Friendly UI) untuk Praktisi & Perangkat Desa Indonesia.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT CODE -->
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(el => el.classList.add('hidden'));
+
+            // Reset buttons style
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-desa-700', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+
+            // Show selected tab content
+            document.getElementById(`content-${tabName}`).classList.remove('hidden');
+
+            // Highlight active button
+            const activeBtn = document.getElementById(`tab-${tabName}`);
+            activeBtn.classList.remove('bg-slate-100', 'text-slate-600');
+            activeBtn.classList.add('bg-desa-700', 'text-white', 'shadow-sm');
+        }
+
+        const data5V = {
+            1: {
+                title: "1. Volume (Jumlah Data)",
+                desc: "Di desa, volume data berarti seberapa banyak jumlah catatan yang ada. Bayangkan ribuan berkas KK, riwayat pembayaran PBB, hingga daftar penerima beras sejahtera.",
+                contoh: "Desa dengan 3.000 jiwa memiliki minimal 3.000 baris data identitas, puluhan ribu transaksi pembayaran, dan ratusan berkas permohonan surat setiap tahunnya."
+            },
+            2: {
+                title: "2. Variety (Keragaman Bentuk Data)",
+                desc: "Data di kantor desa tidak hanya berupa angka atau tabel Excel, tetapi terdiri dari bermacam-macam bentuk.",
+                contoh: "Tabel angka penerima BLT, foto kondisi rumah warga penerima bedah rumah, file PDF peta lokasi sawah, hingga rekaman audio hasil musyawarah dusun (Musdus)."
+            },
+            3: {
+                title: "3. Velocity (Kecepatan Perubahan Data)",
+                desc: "Kecepatan seberapa sering data di desa bertambah atau berubah dari waktu ke waktu.",
+                contoh: "Setiap minggu ada kelahiran bayi baru, warga meninggal, kepindahan penduduk, atau laporan panen harian dari kelompok tani setempat."
+            },
+            4: {
+                title: "4. Veracity (Kebenaran & Akurasi Data)",
+                desc: "Kepastian bahwa data desa itu valid, jujur, dan tidak ganda. Ini adalah tantangan terbesar di desa.",
+                contoh: "Memastikan tidak ada data warga meninggal yang masih terdaftar penerima bansos, atau NIK ganda saat pendataan program desa."
+            },
+            5: {
+                title: "5. Value (Nilai Manfaat)",
+                desc: "Inilah tujuan utama! Seberapa besar manfaat data tersebut bagi kemajuan desa dan kesejahteraan warga.",
+                contoh: "Dengan data yang teratur, Kepala Desa bisa membuat keputusan dalam 5 menit: menentukan penerima bantuan prioritas tanpa menimbulkan kecemburuan sosial."
+            }
+        };
+
+        function showV(index) {
+            // Update button styles
+            for (let i = 1; i <= 5; i++) {
+                const btn = document.getElementById(`btn-v${i}`);
+                if (i === index) {
+                    btn.className = "v-btn p-4 rounded-2xl border-2 border-desa-600 bg-desa-50 text-desa-800 font-bold text-center hover:shadow-md transition";
+                } else {
+                    btn.className = "v-btn p-4 rounded-2xl border-2 border-slate-200 bg-white text-slate-700 font-bold text-center hover:bg-slate-50 transition";
+                }
+            }
+
+            // Render Detail
+            const info = data5V[index];
+            const box = document.getElementById('v-detail-box');
+            box.innerHTML = `
+                <div class="space-y-3">
+                    <h4 class="text-xl font-bold text-desa-900 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-desa-600"></i> ${info.title}
+                    </h4>
+                    <p class="text-slate-700 text-base md:text-lg leading-relaxed">${info.desc}</p>
+                    <div class="bg-white p-4 rounded-xl border border-desa-200 text-slate-800">
+                        <span class="font-bold text-desa-700 block mb-1"><i class="fa-solid fa-lightbulb"></i> Contoh Nyata di Desa:</span>
+                        <p class="text-base">${info.contoh}</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        const dataKasus = {
+            'bansos': {
+                judul: "Studi Kasus 1: Penyaluran Bantuan Sosial (BLT / DTKS)",
+                masalah: "Warga sering protes karena merasa tetangganya yang lebih mampu justru mendapatkan bantuan sosial.",
+                solusiData: "Penggabungan data KTP, data kepemilikan aset, dan data pembayaran listrik dalam satu sistem sederhana.",
+                hasil: "Sistem memberikan skor obyektif penerima bantuan. Saat Musdes, hasil data dapat ditampilkan transparan sehingga tidak ada kecurigaan warga."
+            },
+            'bumdes': {
+                judul: "Studi Kasus 2: Mendorong Pendapatan BUMDes",
+                masalah: "Unit usaha toko desa/BUMDes sering sepi penikmat dan tidak tahu barang apa yang paling dibutuhkan warga.",
+                solusiData: "Mencatat transaksi penjualan bulanan sederhana di komputer/HP pengelola BUMDes.",
+                hasil: "Terlihat pola bahwa pupuk organik dan pakan ternak paling banyak dicari pada bulan Maret-April. BUMDes bisa menyiapkan stok tepat waktu."
+            },
+            'tani': {
+                judul: "Studi Kasus 3: Pemetaan Pertanian & Ketahanan Pangan",
+                masalah: "Petani sering mengalami kelangkaan pupuk bersubsidi dan harga anjlok saat panen raya bersamaan.",
+                solusiData: "Mencatat luas lahan sawah, jenis komoditas, dan perkiraan tanggal tanam tiap kelompok tani.",
+                hasil: "Pemerintah desa dapat memprediksi total tonase panen dan mengajukan alokasi pupuk secara presisi ke dinas sebelum musim tanam tiba."
+            }
+        };
+
+        function simulasiKasus(key) {
+            // Update button UI
+            const keys = ['bansos', 'bumdes', 'tani'];
+            keys.forEach(k => {
+                const btn = document.getElementById(`btn-kasus-${k}`);
+                if (k === key) {
+                    btn.className = "kasus-btn p-5 rounded-2xl border-2 border-desa-600 bg-desa-50 text-left hover:shadow-md transition";
+                } else {
+                    btn.className = "kasus-btn p-5 rounded-2xl border-2 border-slate-200 bg-white text-left hover:bg-slate-50 transition";
+                }
+            });
+
+            const kInfo = dataKasus[key];
+            const box = document.getElementById('kasus-result-box');
+            box.innerHTML = `
+                <div class="space-y-4">
+                    <h4 class="text-xl font-bold text-slate-800">${kInfo.judul}</h4>
+                    
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-rose-50 p-4 rounded-xl border border-rose-200">
+                            <span class="font-bold text-rose-800 text-sm block mb-1"><i class="fa-solid fa-triangle-exclamation"></i> Masalah di Desa:</span>
+                            <p class="text-slate-700 text-sm">${kInfo.masalah}</p>
+                        </div>
+
+                        <div class="bg-blue-50 p-4 rounded-xl border border-blue-200">
+                            <span class="font-bold text-blue-800 text-sm block mb-1"><i class="fa-solid fa-gears"></i> Pemanfaatan Data:</span>
+                            <p class="text-slate-700 text-sm">${kInfo.solusiData}</p>
+                        </div>
+
+                        <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-200">
+                            <span class="font-bold text-emerald-800 text-sm block mb-1"><i class="fa-solid fa-circle-check"></i> Hasil Nyata:</span>
+                            <p class="text-slate-700 text-sm">${kInfo.hasil}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function simpanJawabanLokal() {
+            const formData = {
+                nama: document.getElementById('nama').value,
+                nim: document.getElementById('nim').value,
+                soal1: document.getElementById('soal1').value,
+                soal2_vol: document.getElementById('soal2_vol').value,
+                soal2_var: document.getElementById('soal2_var').value,
+                soal2_ver: document.getElementById('soal2_ver').value,
+                soal3: document.getElementById('soal3').value,
+                soal4: document.getElementById('soal4').value
+            };
+
+            localStorage.setItem('jawaban_rpl_bigdata', JSON.stringify(formData));
+            alert('Jawaban sementara berhasil disimpan di perangkat Anda!');
+        }
+
+        function muatJawabanLokal() {
+            const saved = localStorage.getItem('jawaban_rpl_bigdata');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.getElementById('nama').value = data.nama || '';
+                document.getElementById('nim').value = data.nim || '';
+                document.getElementById('soal1').value = data.soal1 || '';
+                document.getElementById('soal2_vol').value = data.soal2_vol || '';
+                document.getElementById('soal2_var').value = data.soal2_var || '';
+                document.getElementById('soal2_ver').value = data.soal2_ver || '';
+                document.getElementById('soal3').value = data.soal3 || '';
+                document.getElementById('soal4').value = data.soal4 || '';
+            }
+        }
+
+        window.onload = function() {
+            showV(1);
+            simulasiKasus('bansos');
+            muatJawabanLokal();
+        };
+    </script>
+</body>
+</html>
